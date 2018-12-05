@@ -1,0 +1,15 @@
+
+// Load local properties
+File localPropertiesFile = project.file('local.properties')
+if (localPropertiesFile.exists()) {
+  def local = new Properties()
+  local.load(new FileInputStream(localPropertiesFile))
+  local.each {
+    key, value ->
+      if (value.matches('\\d+'))
+        project.ext["$key"] = Integer.parseInt("$value");
+      else
+        project.ext["$key"] = "$value"
+  }
+  logger.warn("Loaded ${local.size()} properties from local properties in a 'local.properties' file")
+}

@@ -1,0 +1,9 @@
+<webevents>
+  <webhook id="2" name="sus-webhook"/>
+  <webevent id="55399.3166452438700" datetime="2018-12-03T09:59:24+11:00" type="uri.created">
+    <event>
+      <group id="4" name="generic-test"/>
+    </event>
+    <uri id="55399" path="/ps/generic/test/documents/test_webhook.psml"/>
+  </webevent>
+</webevents>

@@ -1,0 +1,80 @@
+plugins {
+  id "org.akhikhl.gretty" version "2.0.0"
+}
+
+description = "Example of how to use Webhook Client"
+
+apply plugin: 'war'
+apply plugin: 'maven-publish'
+apply from: "$rootDir/gradle/publishing.gradle"
+
+ext {
+  localContextPath = '/pswebhook'
+  localHost = 'localhost'
+  localHttpPort = 8999
+  localHttpsPort = 8444
+  localMode = 'local'
+}
+
+war {
+  archiveName = 'webhook-client-example.war'
+}
+
+// Dependencies of the project
+dependencies {
+
+  compile rootProject
+
+  // module dependencies
+  compile (
+    'org.pageseeder.berlioz:pso-berlioz:0.11.+',
+    'org.pageseeder.xmlwriter:pso-xmlwriter:1.0.+',
+    'org.slf4j:slf4j-api:1.7.+',
+    'javax.servlet:javax.servlet-api:3.1.0'
+  )
+
+  compileOnly (
+    'org.eclipse.jdt:org.eclipse.jdt.annotation:2.0.0'
+  )
+
+  runtime(
+    'ch.qos.logback:logback-core:1.1.+',
+    'ch.qos.logback:logback-classic:1.1.+'
+  )
+
+  testCompile (
+    'junit:junit:4.12'
+  )
+}
+
+javadoc {
+  failOnError= false
+}
+
+test {
+  testLogging {events 'passed'}
+}
+
+
+// Property for local Jetty dev server
+gretty {
+  jvmArgs = ["-Dberlioz.mode=$localMode", "-Dberlioz.appdata=local/appdata", "-Dbridge.ssl.enableUnsafe=true"]
+  contextPath = localContextPath
+  host = localHost
+  httpPort = localHttpPort
+  httpsPort = localHttpsPort
+  httpsEnabled = true
+  servletContainer = 'jetty9.4'
+  webappCopy {
+    into('WEB-INF/config') {
+      from "$webAppDirName/WEB-INF/config"
+      filter {
+        it.replaceAll('@APP_VERSION@', version).replaceAll('@APP_DATE@', new Date().format('yyyy-MM-dd'))
+      }
+    }
+  }
+  realm 'Berlioz Admin'
+  realmConfigFile "$projectDir/jetty/realm-local.properties"
+  debugPort = 5005      // default
+  debugSuspend = true   // default
+}

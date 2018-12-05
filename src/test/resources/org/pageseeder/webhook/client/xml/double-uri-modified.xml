@@ -1,0 +1,15 @@
+<webevents>
+  <webhook id="2" name="sus-webhook"/>
+  <webevent id="86.4008840876300" datetime="2018-12-03T10:13:27+11:00" type="uri.modified">
+    <event>
+      <group id="5" name="generic-demo"/>
+    </event>
+    <uri id="86" path="/ps/generic/demo/documents/pointer.psml"/>
+  </webevent>
+  <webevent id="89.4008846409000" datetime="2018-12-03T10:13:27+11:00" type="uri.modified">
+    <event>
+      <group id="6" name="generic-demo2"/>
+    </event>
+    <uri2 id="89" path="/ps/generic/demo/documents/receiverb.psml"/>
+  </webevent>
+</webevents>
