@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  This file contains the logback configuration for this project in development mode.
+
+  @version BerliozBase-0.8.1
+-->
+<configuration debug="false" scan="true" scanPeriod="30 seconds">
+
+  <!-- PageSeeder -->
+  <contextName>SUS</contextName>
+
+  <!-- Console appender -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- EH Cache -->
+  <logger name="net.sf.ehcache" level="INFO" />
+  <logger name="org.pageseeder.berlioz" level="INFO" />
+  <logger name="org.pageseeder.bastille" level="INFO" />
+
+  <root level="DEBUG">
+    <appender-ref ref="STDOUT"/>
+  </root>
+
+</configuration>

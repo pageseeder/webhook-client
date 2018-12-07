@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE service-config PUBLIC "-//Berlioz//DTD::Services 1.0//EN"
+           "https://pageseeder.org/schema/berlioz/services-1.0.dtd">
+<!--
+  This file contains the configuration of Berlioz Services.
+-->
+<service-config version="1.0">
+
+  <!-- 
+    General public pages.
+  -->
+  <services group="default">
+    <!-- Home page -->
+    <service id="home" method="get">
+      <url pattern="/home" />
+      <generator name="bundles"  target="html"    class="org.pageseeder.berlioz.bundler.GetWebBundles" />
+      <generator name="home"     target="main"    class="org.pageseeder.berlioz.generator.NoContent" />
+    </service>
+  </services>
+</service-config>

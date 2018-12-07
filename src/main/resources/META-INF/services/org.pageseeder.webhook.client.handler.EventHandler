@@ -1,3 +1,1 @@
 org.pageseeder.webhook.client.handler.PingEventHandler
-com.allette.pbs.sus.user.webhook.UserWebhookHandler
-com.allette.pbs.sus.user.webhook.UserMembershipWebhookHandler

@@ -9,7 +9,7 @@ apply plugin: 'maven-publish'
 apply from: "$rootDir/gradle/publishing.gradle"
 
 ext {
-  localContextPath = '/pswebhook'
+  localContextPath = '/webhook'
   localHost = 'localhost'
   localHttpPort = 8999
   localHttpsPort = 8444
@@ -28,6 +28,7 @@ dependencies {
   // module dependencies
   compile (
     'org.pageseeder.berlioz:pso-berlioz:0.11.+',
+    'org.pageseeder.bastille:pso-bastille:0.10.0',
     'org.pageseeder.xmlwriter:pso-xmlwriter:1.0.+',
     'org.slf4j:slf4j-api:1.7.+',
     'javax.servlet:javax.servlet-api:3.1.0'
@@ -39,7 +40,8 @@ dependencies {
 
   runtime(
     'ch.qos.logback:logback-core:1.1.+',
-    'ch.qos.logback:logback-classic:1.1.+'
+    'ch.qos.logback:logback-classic:1.1.+',
+    'org.pageseeder.berlioz:pso-berlioz-kickstart:0.11.3',
   )
 
   testCompile (
