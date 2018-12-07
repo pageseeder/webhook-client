@@ -14,7 +14,7 @@
     <service id="home" method="get">
       <url pattern="/home" />
       <generator name="bundles"  target="html"    class="org.pageseeder.berlioz.bundler.GetWebBundles" />
-      <generator name="home"     target="main"    class="org.pageseeder.berlioz.generator.NoContent" />
+      <generator name="home"     target="main"    class="org.pageseeder.webhook.client.example.generator.ListEventsReceived" />
     </service>
   </services>
 </service-config>

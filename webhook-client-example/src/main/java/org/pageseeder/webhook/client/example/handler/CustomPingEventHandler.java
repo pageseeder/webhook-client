@@ -13,14 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pageseeder.webhook.client.handler.example;
+package org.pageseeder.webhook.client.example.handler;
 
 import java.time.format.DateTimeFormatter;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.pageseeder.webhook.client.example.service.EventService;
 import org.pageseeder.webhook.client.handler.EventHandler;
 import org.pageseeder.webhook.client.model.Event;
 import org.pageseeder.webhook.client.model.EventObject;
+import org.pageseeder.webhook.client.model.EventType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,29 +30,20 @@ import org.slf4j.LoggerFactory;
  * @author Carlos Cabral
  * @since 03 Dec. 2018
  */
-public class URIEventHandler implements EventHandler {
+public class CustomPingEventHandler implements EventHandler {
   
   private static final Logger LOGGER = LoggerFactory.getLogger(EventHandler.class);
   
   @Override
   public void handle(@NonNull Event event) {
     EventObject object = event.getObject();
-    LOGGER.debug("Received a URI Event {} for URI id '{}' at {}", event.getType().getType(), object.getId(), event.getDateTime().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+    LOGGER.debug("Received a ping event for wehbhook id/name {}/'{}' at {}", object.getId(), object.getAttributes().get("name"), event.getDateTime().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+    EventService service = new EventService();
+    service.add(event);
   }
 
   @Override
   public boolean support(@NonNull Event event) {
-    boolean support = false;
-    switch (event.getType()) {
-    case URI_ARCHIVED:
-    case URI_CREATED:
-    case URI_DELETED:
-    case URI_MODIFIED:
-      support = true;
-      break;
-    default:
-      support = false;
-    }    
-    return support;
+    return event.getType().equals(EventType.WEBHOOK_PING);
   }
 }

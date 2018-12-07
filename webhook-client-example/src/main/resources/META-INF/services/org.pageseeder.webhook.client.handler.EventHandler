@@ -1,2 +1,3 @@
-org.pageseeder.webhook.client.handler.example.MemberEventHandler
-org.pageseeder.webhook.client.handler.example.URIEventHandler
+org.pageseeder.webhook.client.example.handler.CustomPingEventHandler
+org.pageseeder.webhook.client.example.handler.MemberEventHandler
+org.pageseeder.webhook.client.example.handler.URIEventHandler
