@@ -30,7 +30,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * <p>Handler to consume the {@link Request} result stream as {@link List} of {@link Webhook}.
+ * <p>Handler to consume the Webhook Request  and return a a {@link List} of {@link Webhook}.
  * 
  *
  * @author Carlos Cabral
@@ -52,10 +52,7 @@ public class RequestHandler extends DefaultHandler {
   
   /** The event builder. */
   private Event.Builder eventBuilder;
-   
-  /* (non-Javadoc)
-   * @see org.xml.sax.helpers.DefaultHandler#startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes)
-   */
+
   @Override
   public void startElement(String uri, String localName, String qName, Attributes attributes) {
     final String element = (localName == null || localName.isEmpty()) ? qName : localName;
@@ -103,11 +100,8 @@ public class RequestHandler extends DefaultHandler {
     }
   }
 
-  /* (non-Javadoc)
-   * @see org.xml.sax.helpers.DefaultHandler#endElement(java.lang.String, java.lang.String, java.lang.String)
-   */
-  @Override
-  
+
+  @Override 
   public void endElement (String uri, String localName, String qName) throws SAXException {
     final String element = (localName == null || localName.isEmpty()) ? qName : localName;
     switch (element) {

@@ -36,13 +36,15 @@ public class Webhook {
   /** The path. */
   private final String _name;
   
+  /** The events. */
   private final List<Event> _events;
   
   /**
-   * 
+   * Instantiates a new webhook.
    *
    * @param id the id
    * @param name the name
+   * @param events the events
    */
   public Webhook(@NonNull String id, @Nullable String name, @NonNull List<Event> events) {
     super();
@@ -89,7 +91,8 @@ public class Webhook {
     private String id;
     /** the name. */
     private String name;
-    /** the evetns */
+    
+    /**  the evetns. */
     List<Event> events;
     /**
      * Instantiates a new builder.

@@ -15,6 +15,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 /**
+ * The Class XMLHelper.
+ *
  * @author Carlos Cabral
  * @since 05 Dec. 2018
  */
@@ -25,10 +27,10 @@ public class XMLHelper {
    * Parses the specified file using the given handler.
    *
    * @param handler  The content handler to use.
-   * @param reader   The reader over the XML to parse.
-   * @param validate whether to validate or not.
-   *
-   * @throws BerliozException Should something unexpected happen.
+   * @param xmlBody the xml body
+   * @throws SAXException the SAX exception
+   * @throws ParserConfigurationException the parser configuration exception
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static void parse(ContentHandler handler, String xmlBody) throws SAXException, ParserConfigurationException, IOException {
     StringReader reader = new StringReader(xmlBody);

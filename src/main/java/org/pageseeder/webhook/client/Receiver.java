@@ -61,11 +61,17 @@ public class Receiver extends HttpServlet {
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -5482719005441407995L; 
   
+  /* (non-Javadoc)
+   * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+   */
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     doPost(req, resp);
   }
 
+  /* (non-Javadoc)
+   * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+   */
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp)
     throws ServletException, IOException {
@@ -214,9 +220,8 @@ public class Receiver extends HttpServlet {
    * @param charset the charset
    * @param handler the handler
    * @throws IOException Signals that an I/O exception has occurred.
-   * @throws BerliozException the berlioz exception
-   * @throws ParserConfigurationException 
-   * @throws SAXException 
+   * @throws SAXException the SAX exception
+   * @throws ParserConfigurationException the parser configuration exception
    */
   protected void parseBody(HttpServletRequest request, Charset charset, DefaultHandler handler) throws IOException, SAXException, ParserConfigurationException {
     String xmlBody = getBody(request, charset);

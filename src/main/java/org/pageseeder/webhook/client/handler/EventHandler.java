@@ -30,16 +30,16 @@ public interface EventHandler {
   
   /**
    * Handle the event situation.
-   * 
-   * @param event
+   *
+   * @param event the event
    */
   public abstract void handle(@NonNull Event event);
   
   /**
    * Check if this handler handles this event.
-   * 
-   * @param event
-   * @return
+   *
+   * @param event the event
+   * @return true, if successful
    */
   public abstract boolean support(@NonNull Event event);
 }
