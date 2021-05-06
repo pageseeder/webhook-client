@@ -1,55 +1,42 @@
-
 plugins {
-  id "com.jfrog.bintray" version "1.7"
+  id 'java-library'
+  id 'maven-publish'
+  id 'io.codearte.nexus-staging' version '0.30.0'
 }
 
 ext {
   globalVersion = file('version.txt').text
 }
 
-group = 'org.pageseeder.webhook.client'
+//group = 'org.pageseeder.webhook.client'
 description = "$title"
-version     = "$globalVersion"
+//version     = "$globalVersion"
 
 allprojects {
   group   = 'org.pageseeder.webhook.client'
   version = "$globalVersion"
 
   apply plugin: 'java'
-  apply plugin: 'com.jfrog.bintray'
-  apply plugin: 'eclipse'
-  apply plugin: 'maven-publish'
-  apply from: "$rootDir/gradle/publishing.gradle"
+  apply from: "$rootDir/gradle/publish-mavencentral.gradle"
 
-  sourceCompatibility = 1.8
-  targetCompatibility = 1.8
+  java {
+    withJavadocJar()
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+  }
 
   repositories {
-    maven { url 'http://dl.bintray.com/pageseeder/maven' }
-    jcenter()
-    ivy {
-      url 'http://ivy.pageseeder.com/shared'
-      layout 'pattern', {
-        artifact '[organisation]/[module]/[artifact]-[revision](.[ext])'
-        ivy '[organisation]/[module]/ivy-[revision].xml'
+    mavenCentral {
+      url = uri("https://maven-central.storage.googleapis.com/maven2")
+    }
+    // Use 'jcenter' for resolving your dependencies that are not in maven central yet.
+    jcenter() {
+      content {
+        //includeModule("org.gretty", "gretty-runner-jetty94:3.0.3")
+        includeGroup "org.gretty"
       }
     }
-  }
-}
-
-task wrapper(type: Wrapper) {
-  gradleVersion = '4.7'
-}
-
-task publishAllToBintray (group: "allette"){
-  allprojects.each {
-    dependsOn("${it.path}:bintrayUpload" )
-  }
-}
-
-task publishAllToMavenLocal (group: "allette"){
-  allprojects.each {
-    dependsOn("${it.path}:publishToMavenLocal" )
   }
 }
 
@@ -57,31 +44,10 @@ task publishAllToMavenLocal (group: "allette"){
 dependencies {
 
   // The production code uses the SLF4J logging API at compile time
-  compile (
-    'org.slf4j:slf4j-api:1.7.12',
-    'javax.servlet:javax.servlet-api:3.1.0',
-    'org.eclipse.jdt:org.eclipse.jdt.annotation:2.0.0'
-  )
+  implementation('org.slf4j:slf4j-api:1.7.12')
+  implementation('javax.servlet:javax.servlet-api:3.1.0')
+  implementation('org.eclipse.jdt:org.eclipse.jdt.annotation:2.0.0')
 
   // Test dependencies
-  testCompile (
-    'junit:junit:4.12',
-  )
-}
-
-// To preserve Eclipse Null annotations when updating libs
-eclipse {
-  classpath {
-    file {
-      whenMerged { classpath ->
-        if (project.hasProperty('eclipseAnnotationPath')) {
-          classpath.entries.forEach({
-            if (it.kind == 'con' || it.kind == 'lib') {
-              it.entryAttributes.put('annotationpath', "$eclipseAnnotationPath")
-            }
-          })
-        }
-      }
-    }
-  }
+  testImplementation ('junit:junit:4.12')
 }

@@ -1,10 +1,26 @@
-plugins {
-  id "org.akhikhl.gretty" version "2.0.0"
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+    // Use 'jcenter' for resolving your dependencies that are not in maven central yet.
+    jcenter() {
+      content {
+        includeModule("org.gretty", "gretty-runner-jetty94:3.0.3")
+        includeGroup "org.gretty"
+      }
+    }
+  }
+
+  dependencies {
+    classpath ('gradle.plugin.org.gretty:gretty:3.0.3')
+  }
 }
 
 description = "Example of how to use Webhook Client"
 
 apply plugin: 'war'
+apply plugin: 'org.gretty'
 
 ext {
   localContextPath = '/webhook'
@@ -21,10 +37,10 @@ war {
 // Dependencies of the project
 dependencies {
 
-  compile rootProject
+  implementation rootProject
 
   // module dependencies
-  compile (
+  implementation (
     'org.pageseeder.berlioz:pso-berlioz:0.11.+',
     'org.pageseeder.bastille:pso-bastille:0.10.0',
     'org.pageseeder.xmlwriter:pso-xmlwriter:1.0.+',
@@ -36,13 +52,13 @@ dependencies {
     'org.eclipse.jdt:org.eclipse.jdt.annotation:2.0.0'
   )
 
-  runtime(
+  runtimeOnly(
     'ch.qos.logback:logback-core:1.1.+',
     'ch.qos.logback:logback-classic:1.1.+',
     'org.pageseeder.berlioz:pso-berlioz-kickstart:0.11.3',
   )
 
-  testCompile (
+  testImplementation (
     'junit:junit:4.12'
   )
 }
@@ -51,9 +67,9 @@ javadoc {
   failOnError= false
 }
 
-test {
-  testLogging {events 'passed'}
-}
+//test {
+//  testLogging {events 'passed'}
+//}
 
 
 // Property for local Jetty dev server
