@@ -1,3 +1,4 @@
+[![Maven Central](https://img.shields.io/maven-central/v/org.pageseeder.webhook-client/pso-webhook-client.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22org.pageseeder.webhook-client%22%20AND%20a:%22pso-webhook-client%22)
 # pageseeder-webhook-client
 Has common logic to handle the requests sent by pageseeder (webhook) and search for a class responsible to handle it (uses Java SPI)
 
