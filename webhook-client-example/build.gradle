@@ -25,10 +25,10 @@ dependencies {
 
   // module dependencies
   implementation (
-      'org.pageseeder.berlioz:pso-berlioz:0.11.+',
+      'org.pageseeder.berlioz:pso-berlioz:0.12.1',
       'org.pageseeder.bastille:pso-bastille:0.10.0',
-      'org.pageseeder.xmlwriter:pso-xmlwriter:1.0.+',
-      'org.slf4j:slf4j-api:1.7.+',
+      'org.pageseeder.xmlwriter:pso-xmlwriter:1.0.4',
+      'org.slf4j:slf4j-api:1.7.30',
       'javax.servlet:javax.servlet-api:3.1.0'
   )
 
@@ -37,8 +37,8 @@ dependencies {
   )
 
   runtimeOnly(
-      'ch.qos.logback:logback-core:1.1.+',
-      'ch.qos.logback:logback-classic:1.1.+',
+      'ch.qos.logback:logback-core:1.2.3',
+      'ch.qos.logback:logback-classic:1.2.3',
       'org.pageseeder.berlioz:pso-berlioz-kickstart:0.11.3',
   )
 
