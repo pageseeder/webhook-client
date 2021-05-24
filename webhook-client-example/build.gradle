@@ -1,5 +1,5 @@
 plugins {
-  id "org.akhikhl.gretty" version "2.0.0"
+  id "org.gretty" version "3.0.4"
 }
 
 description = "Example of how to use Webhook Client"
@@ -15,46 +15,41 @@ ext {
 }
 
 war {
-  archiveName = 'webhook-client-example.war'
+  archiveName 'webhook-client-example.war'
 }
 
 // Dependencies of the project
 dependencies {
 
-  compile rootProject
+  implementation rootProject
 
   // module dependencies
-  compile (
-    'org.pageseeder.berlioz:pso-berlioz:0.11.+',
-    'org.pageseeder.bastille:pso-bastille:0.10.0',
-    'org.pageseeder.xmlwriter:pso-xmlwriter:1.0.+',
-    'org.slf4j:slf4j-api:1.7.+',
-    'javax.servlet:javax.servlet-api:3.1.0'
+  implementation (
+      'org.pageseeder.berlioz:pso-berlioz:0.11.+',
+      'org.pageseeder.bastille:pso-bastille:0.10.0',
+      'org.pageseeder.xmlwriter:pso-xmlwriter:1.0.+',
+      'org.slf4j:slf4j-api:1.7.+',
+      'javax.servlet:javax.servlet-api:3.1.0'
   )
 
   compileOnly (
-    'org.eclipse.jdt:org.eclipse.jdt.annotation:2.0.0'
+      'org.eclipse.jdt:org.eclipse.jdt.annotation:2.0.0'
   )
 
-  runtime(
-    'ch.qos.logback:logback-core:1.1.+',
-    'ch.qos.logback:logback-classic:1.1.+',
-    'org.pageseeder.berlioz:pso-berlioz-kickstart:0.11.3',
+  runtimeOnly(
+      'ch.qos.logback:logback-core:1.1.+',
+      'ch.qos.logback:logback-classic:1.1.+',
+      'org.pageseeder.berlioz:pso-berlioz-kickstart:0.11.3',
   )
 
-  testCompile (
-    'junit:junit:4.12'
+  testImplementation (
+      'junit:junit:4.12'
   )
 }
 
 javadoc {
   failOnError= false
 }
-
-test {
-  testLogging {events 'passed'}
-}
-
 
 // Property for local Jetty dev server
 gretty {
